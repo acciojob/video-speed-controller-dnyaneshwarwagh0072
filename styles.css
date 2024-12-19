@@ -1,2 +1,36 @@
+body {
+  font-family: sans-serif;
+}
 
-/* Your CSS Code here. */
+.wrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.flex {
+  width: 100%;
+}
+
+.speed {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 150px;
+  border: 1px solid #ccc;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: ns-resize;
+  display: flex;
+  align-items: flex-end;
+}
+
+.speed-bar {
+  width: 100%;
+  background: linear-gradient(to bottom, #ff0000, #0000ff);
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  user-select: none;
+  height: 50%;
+}
