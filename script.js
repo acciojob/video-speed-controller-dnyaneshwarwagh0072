@@ -1,15 +1,60 @@
-const video = document.querySelector('.flex');
-const speed = document.querySelector('.speed');
-const speedBar = document.querySelector('.speed-bar');
+const player = document.querySelector('.player');
+const video = player.querySelector('.viewer');
+const toggle = player.querySelector('.toggle');
+const progress = player.querySelector('.progress');
+const progressFilled = player.querySelector('.progress__filled');
+const skipButtons = player.querySelectorAll('[data-skip]');
+const volumeSlider = player.querySelector('input[name="volume"]');
+const playbackSpeedSlider = player.querySelector('input[name="playbackSpeed"]');
 
-speed.addEventListener('mousemove', function(e) {
-  const y = e.pageY - speed.offsetTop;
-  const percent = y / speed.offsetHeight;
-  const min = 0.5; // Minimum playback speed
-  const max = 2.0; // Maximum playback speed
-  const height = Math.round(percent * 100) + '%';
-  const playbackRate = percent * (max - min) + min;
-  speedBar.style.height = height;
-  speedBar.textContent = playbackRate.toFixed(2) + '×';
-  video.playbackRate = playbackRate;
-});
+// Toggle play and pause
+function togglePlay() {
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+// Update play/pause button
+function updateButton() {
+    const icon = video.paused ? '►' : '❚ ❚';
+    toggle.textContent = icon;
+}
+
+// Skip forward or backward
+function skip() {
+    video.currentTime += parseFloat(this.dataset.skip);
+}
+
+// Update video volume
+function handleVolume() {
+    video.volume = volumeSlider.value;
+}
+
+// Update video playback speed
+function handlePlaybackSpeed() {
+    video.playbackRate = playbackSpeedSlider.value;
+}
+
+// Handle progress bar update
+function updateProgress() {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressFilled.style.width = `${percent}%`;
+}
+
+// Seek in the video by clicking the progress bar
+function seek(e) {
+    const seekTime = (e.offsetX / progress.offsetWidth) * video.duration;
+    video.currentTime = seekTime;
+}
+
+// Event listeners
+toggle.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+skipButtons.forEach(button => button.addEventListener('click', skip));
+volumeSlider.addEventListener('input', handleVolume);
+playbackSpeedSlider.addEventListener('input', handlePlaybackSpeed);
+video.addEventListener('timeupdate', updateProgress);
+progress.addEventListener('click', seek);

@@ -1,36 +1,56 @@
 body {
-  font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #2c3e50;
+    margin: 0;
 }
 
-.wrapper {
-  position: relative;
-  max-width: 800px;
-  margin: 50px auto;
+.player {
+    max-width: 750px;
+    border: 5px solid #3498db;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
 }
 
-.flex {
-  width: 100%;
+.player__video {
+    width: 100%;
 }
 
-.speed {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 30px;
-  height: 150px;
-  border: 1px solid #ccc;
-  background: rgba(0, 0, 0, 0.1);
-  cursor: ns-resize;
-  display: flex;
-  align-items: flex-end;
+.player__controls {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #ecf0f1;
 }
 
-.speed-bar {
-  width: 100%;
-  background: linear-gradient(to bottom, #ff0000, #0000ff);
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  user-select: none;
-  height: 50%;
+.player__button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    padding: 0 10px;
+    cursor: pointer;
+    color: #3498db;
+}
+
+.player__slider {
+    margin: 0 10px;
+}
+
+.progress {
+    background: #ccc;
+    height: 5px;
+    flex: 1;
+    margin: 0 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress__filled {
+    background: #3498db;
+    width: 0;
+    height: 100%;
 }
